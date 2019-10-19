@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Experimenting</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.4.9/Tone.js"></script>
+    <script>
+            function playC (time = '0') {
+                var synth = new Tone.Synth().toMaster();
+                synth.triggerAttackRelease('100', '1m', time);
+            }
+
+            Tone.Transport.schedule(playC, 0);
+            Tone.Transport.schedule(playC, '0:2');
+            Tone.Transport.schedule(playC, '0:2:2.5');
+
+            //set the transport to repeat
+            Tone.Transport.loopEnd = '1m';
+            Tone.Transport.loop = true;
+
+    </script>
+</head>
+<body>
+    <div id = "main">
+        <button onclick = "playC()">C</button>
+        <button onclick = "Tone.Transport.toggle()">Noise</button>
+    </div>
+</body>
+</html>
