@@ -35,8 +35,24 @@
             <button onclick = "Tone.Transport.cancel(); Melody1(); Tone.Transport.toggle()">Improvise in C</button>
         </div>
         <div>
-            <button onclick = "Tone.Transport.cancel(); Beat1(); Tone.Transport.toggle()">Sick beat</button>
+            <button onclick = "Tone.Transport.cancel(); Beat1(); Tone.Transport.toggle()">Example beat</button>
         </div>
     </div>
+    <script>
+        //key bindings for 'notes'
+        let notesArr = Array.from(document.getElementsByTagName("button"));
+        notesArr = notesArr.filter(elem => elem.parentNode.id === "notes");
+
+        let possibleKeys = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+        function keyboardFunc (event) {
+            console.log(event.key);
+            if (possibleKeys.indexOf(event.key) !== -1) {
+                notesArr[possibleKeys.indexOf(event.key)].click();
+            }
+        }
+        window.addEventListener("keypress", keyboardFunc);
+
+
+    </script>
 </body>
 </html>

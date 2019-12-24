@@ -110,29 +110,119 @@ let Melody1 = () => {
 };
 
 let base1 = new Tone.PolySynth().toMaster();
+
+base1.set(
+    {
+        "envelope" : {
+            "attack" : 0.01,
+            "decay": 0.10,
+            "sustain": 0.10,
+            "release": 1.20
+        },
+        "oscillator" : {
+            "type": "sine"
+        }
+    }
+);
+
+
 let snare = new Tone.PolySynth().toMaster();
-let membraneSynth1 = new Tone.MembraneSynth().toMaster();
+
+snare.set(
+    {
+        "envelope" : {
+            "attack" : 0.01,
+            "decay": 0.10,
+            "sustain": 0.10,
+            "release": 1.20
+        },
+        "oscillator" : {
+            "type": "sine"
+        }
+    }
+);
+
+let poly1 = new Tone.PolySynth().toMaster();
+
+poly1.set(
+    {
+        "envelope" : {
+            "attack" : 0.01,
+            "decay": 0.10,
+            "sustain": 0.10,
+            "release": 1.20
+        },
+        "oscillator" : {
+            "type": "sine"
+        }
+    }
+);
+
+let tones = ['C5', 'E5', 'F5'], indexTone;
+function randomTone (time) {
+    indexTone = Math.floor(Math.random()*tones.length);
+    poly1.triggerAttackRelease(tones[indexTone], '1m', time);
+}
+
+let membraneSynth1 = new Tone.MembraneSynth({
+    pitchDecay : 0.05 ,
+    octaves : 10 ,
+    oscillator : {
+        "type": "sine"
+    } ,
+    envelope : {
+        attack : 0.26 ,
+        decay : 0.12 ,
+        sustain : 0.97 ,
+        release : 0.01 ,
+    }
+}).toMaster();
+
+
+let membraneSynth2 = new Tone.MembraneSynth({
+    pitchDecay : 0.05 ,
+    octaves : 10 ,
+    oscillator : {
+        "type": "sine",
+    } ,
+    envelope : {
+        attack : 0.1,
+        decay : 0.4 ,
+        sustain : 0.97 ,
+        release : 0.01 ,
+    }
+}).toMaster();
 
 function baseBeat (time) {
-    base1.triggerAttackRelease('C1', '4n', time);
+    base1.triggerAttackRelease('C3', '4n', time);
 }
 
 function snareHit (time) {
     snare.triggerAttackRelease('C3', '8t', time);
 }
 
+function kick (time) {
+    membraneSynth1.triggerAttackRelease('C1', '4n', time);
+}
+
+function tom (time) {
+    membraneSynth2.triggerAttackRelease('C3', '8t', time);
+}
+
 let Beat1 = () => {
+    Tone.Transport.schedule(randomTone, 0);
     Tone.Transport.schedule(baseBeat, 0);
+    Tone.Transport.schedule(kick, 0);
     Tone.Transport.schedule(snareHit, '1');
+    Tone.Transport.schedule(tom, '1');
     Tone.Transport.schedule(baseBeat, '2');
     Tone.Transport.schedule(baseBeat, '2.5');
+    Tone.Transport.schedule(kick, '2');
+    Tone.Transport.schedule(kick, '2.5');
     Tone.Transport.schedule(snareHit, '3');
+    Tone.Transport.schedule(tom, '3');
 
-    /*
-    REMEMBER: TONE.TRANSPORT accepts only strings = seconds, or 4n = quarter note, 8n = eight note 8t = eighth note triplet
-    '4hz' = 0.25 seconds
-    '32:2:1' = 'bars:beats:sixteenths' (ableton live)
-    */
+
 
     Tone.Transport.loopEnd = '4';
     Tone.Transport.loop = true;
