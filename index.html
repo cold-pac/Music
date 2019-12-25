@@ -33,6 +33,7 @@
         </div>
         <div>
             <button onclick = "Tone.Transport.cancel(); Melody1(); Tone.Transport.toggle()">Improvise in C</button>
+            <button onclick = "triggerSynth = () => {}; Tone.Transport.cancel(); Melody1(); Tone.Transport.toggle()">Just play chords</button>
         </div>
         <div>
             <button onclick = "Tone.Transport.cancel(); Beat1(); Tone.Transport.toggle()">Example beat</button>
@@ -43,7 +44,7 @@
         let notesArr = Array.from(document.getElementsByTagName("button"));
         notesArr = notesArr.filter(elem => elem.parentNode.id === "notes");
 
-        let possibleKeys = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';'];
+        let possibleKeys = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", "Enter"];
         function keyboardFunc (event) {
             console.log(event.key);
             if (possibleKeys.indexOf(event.key) !== -1) {

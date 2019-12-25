@@ -84,19 +84,23 @@ function triggerSynth(time){
 
 let Melody1 = () => {
     Tone.Transport.schedule(triggerSynth, 0);
-    Tone.Transport.schedule(playGChord, 0);
+    Tone.Transport.schedule(playCChord, 0);
     Tone.Transport.schedule(triggerSynth, '0.5');
     Tone.Transport.schedule(triggerSynth, '1');
+    Tone.Transport.schedule(playCChord, '1');
     Tone.Transport.schedule(triggerSynth, '2');
-    Tone.Transport.schedule(playEmChord, '2');
+    Tone.Transport.schedule(playDChord, '2');
     Tone.Transport.schedule(triggerSynth, '3');
+    Tone.Transport.schedule(playDChord, '3');
     Tone.Transport.schedule(triggerSynth, '3.5');
     Tone.Transport.schedule(triggerSynth, '4');
-    Tone.Transport.schedule(playCChord, '4');
+    Tone.Transport.schedule(playEmChord, '4');
     Tone.Transport.schedule(triggerSynth, '5');
+    Tone.Transport.schedule(playEmChord, '5');
     Tone.Transport.schedule(triggerSynth, '6');
-    Tone.Transport.schedule(playDChord, '6');
+    Tone.Transport.schedule(playGChord, '6');
     Tone.Transport.schedule(triggerSynth, '7');
+    Tone.Transport.schedule(playGChord, '7');
 
 
     /*
